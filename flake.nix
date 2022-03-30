@@ -32,7 +32,7 @@
                 echo "🌐 SSH Host: ${host}"
               '' + (if remote then ''
                 echo "🚀 Sending flake to ${machine} via nix copy:"
-                ( set -x; ${final.nix}/bin/nix copy ${flake} --to ssh://${user}@${host} )
+                ( set -x; ${final.nix}/bin/nix copy ${flake} --to ssh-ng://${user}@${host} )
                 echo "🤞 Activating configuration on ${machine} via ssh:"
                 ( set -x; ${final.openssh}/bin/ssh -t ${user}@${host} 'sudo nixos-rebuild ${switch} --flake ${flake}#${machine}' )
               '' else ''
